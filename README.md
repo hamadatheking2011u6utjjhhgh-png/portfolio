@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>『𓅖⃟Mohamed𓅖』 | مطوّر بوتات واتساب</title>
+<meta name="description" content="『𓅖⃟Mohamed𓅖』 - مطوّر بوتات واتساب بنظام الأوامر، خبير JavaScript و HTML لبناء أنظمة سريعة وذكية.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0F1E; 
+    --bg-alt: #111827; 
+    --surface: #1F2937; 
+    --ink: #F3F4F6; 
+    --ink-soft: #9CA3AF; 
+    --ink-faint: #6B7280; 
+    --teal: #14B8A6; 
+    --teal-dark: #0F766E;
+    --amber: #F59E0B; 
+    --whatsapp: #22C55E; 
+    --whatsapp-faint: rgba(34, 197, 94, 0.1);
+    --line: rgba(255, 255, 255, 0.06);
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 32px;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Tajawal', sans-serif;
+    --body: 'Cairo', sans-serif;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.8;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;transition: all 0.2s ease;}
+  ul{list-style:none;}
+  img,svg{display:block;}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  ::selection{ background:var(--whatsapp); color:#fff; }
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10, 15, 30, 0.8);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:80px;
+  }
+  
+  /* --- FIXED & IMPROVED LOGO STYLE --- */
+  .logo {
+    display: flex;
+    align-items: center;
+    direction: ltr; /* لضمان ترتيب الرموز والاسم الإنجليزي بشكل صحيح من اليسار لليمين */
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .logo .decor {
+    color: var(--teal);
+    font-family: Arial, sans-serif; /* فونت نظام افتراضي لضمان ظهور الزخرفة بشكل سليم وبدون مربعات */
+  }
+  .logo .name-wrap {
+    display: flex;
+    align-items: center;
+    font-family: var(--mono);
+    margin: 0 4px;
+  }
+  .logo .ball-o {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--whatsapp);
+    display: inline-block;
+    position: relative;
+    top: 1px;
+    margin: 0 1px;
+    box-shadow: 0 0 10px var(--whatsapp);
+    animation: dropBall 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  .logo .dev-tag {
+    font-family: var(--mono);
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  @keyframes dropBall {
+    0% { opacity: 0; transform: translateY(-80px); }
+    10% { opacity: 1; }
+    60% { transform: translateY(0px); } 
+    75% { transform: translateY(-8px); } 
+    90% { transform: translateY(0px); }
+    100% { opacity: 1; transform: translateY(0px); }
+  }
+
+  .navlinks{ display:flex; gap:32px; font-size:0.95rem; color:var(--ink-soft); font-weight: 600;}
+  .navlinks a:hover{ color:var(--whatsapp); }
+  
+  .navbtn{
+    background:var(--whatsapp); color:#fff; padding:10px 20px; border-radius:99px;
+    font-weight: 700; font-size: 0.9rem;
+    box-shadow: 0 4px 12px var(--whatsapp-faint);
+  }
+  .navbtn:hover { background: #1da857; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(34, 197, 94, 0.2); }
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:120px 0 100px;
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:64px;
+    align-items:center;
+    position: relative;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px; background: var(--whatsapp); opacity: 0.05; filter: blur(100px); border-radius: 50%; z-index: -1;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--whatsapp);
+    background: var(--whatsapp-faint);
+    padding: 6px 12px;
+    border-radius: 99px;
+    display:inline-flex; align-items:center; gap:8px;
+    margin-bottom:24px;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  .eyebrow .pulse-dot{
+    width:8px;height:8px;border-radius:50%; background:var(--whatsapp);
+    box-shadow:0 0 8px var(--whatsapp); animation:pulseGlow 2s infinite;
+  }
+  @keyframes pulseGlow{ 0%,100%{opacity:0.5;} 50%{opacity:1; box-shadow:0 0 12px var(--whatsapp);} }
+
+  h1.title{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(2.5rem, 5.5vw, 3.8rem);
+    line-height:1.15;
+    margin-bottom:24px;
+    color: var(--ink);
+    letter-spacing: -1px;
+  }
+  h1.title span{ 
+    background: linear-gradient(135deg, var(--whatsapp), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .hero p.lead{
+    color:var(--ink-soft);
+    font-size:1.15rem;
+    max-width:48ch;
+    margin-bottom:40px;
+  }
+  .hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 32px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:1rem;
+    transition: all 0.2s ease;
+  }
+  .btn:hover{ transform:translateY(-3px); }
+  
+  .btn-primary{
+    background:linear-gradient(135deg, var(--whatsapp) 0%, #1da857 100%); color:#fff;
+    box-shadow:0 12px 30px -10px rgba(34, 197, 94, 0.5);
+  }
+  .btn-primary:hover { box-shadow:0 15px 35px -8px rgba(34, 197, 94, 0.6); }
+
+  .btn-ghost{
+    background:var(--surface); color:var(--ink);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{ border-color:var(--ink-faint); background: var(--bg-alt);}
+
+  .stat-row{ display:flex; gap:32px; margin-top:56px; border-top: 1px solid var(--line); padding-top: 32px;}
+  .stat b{
+    font-family:var(--mono); font-size:1.8rem; display:block; color:var(--ink); line-height: 1.2;
+  }
+  .stat span{ font-size:0.85rem; color:var(--ink-faint); font-weight: 600;}
+
+  /* ===== PHONE MOCKUP ===== */
+  .phone-container { position: relative; display: flex; justify-content: center;}
+  .phone-container::after {
+    content: ''; position: absolute; bottom: -20px; width: 80%; height: 40px; background: rgba(0,0,0,0.5); filter: blur(20px); border-radius: 50%; z-index: -1;
+  }
+  .phone{
+    background:#080b14; 
+    border: 14px solid #080b14;
+    border-radius:38px;
+    width:min(340px, 100%);
+    box-shadow: var(--shadow-lg), 0 0 0 2px rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .phone::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 25px; background: #080b14; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 10;
+  }
+
+  .phone-screen{
+    background:#0F172A; 
+    border-radius:24px;
+    height:560px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .chat-head{
+    background:var(--surface);
+    color:#fff;
+    padding:20px 18px 14px; 
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--body);
+    font-size:0.9rem;
+    flex-shrink:0;
+    border-bottom: 1px solid var(--line);
+  }
+  .chat-avatar{
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg, var(--whatsapp), var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display); font-weight:900; color:#fff; font-size: 1.1rem;
+    flex-shrink:0;
+  }
+  .chat-head b { font-weight: 700;}
+  .chat-head .status{ font-size:0.75rem; color:var(--whatsapp); font-weight: 600; display: flex; align-items: center; gap: 4px;}
+  .chat-head .status::before { content:''; width:6px;height:6px;background:var(--whatsapp);border-radius:50%; }
+
+  .chat-body{
+    flex:1;
+    padding:20px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    overflow-y:hidden;
+  }
+  .bubble{
+    max-width:80%;
+    padding:11px 15px;
+    border-radius:var(--radius-sm);
+    font-size:0.9rem;
+    font-family:var(--body);
+    opacity:0;
+    animation:rise 0.4s ease forwards;
+    line-height: 1.5;
+    box-shadow: var(--shadow-sm);
+  }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(15px) scale(0.95); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  .bubble.user{
+    align-self:flex-start;
+    background:var(--surface);
+    color: var(--ink);
+    border-bottom-left-radius:4px;
+    border: 1px solid var(--line);
+  }
+  .bubble.bot{
+    align-self:flex-end;
+    background:var(--whatsapp);
+    color:#fff;
+    border-bottom-right-radius:4px;
+    font-weight: 500;
+  }
+  .bubble.bot span.cmd { font-family: var(--mono); background: rgba(0,0,0,0.15); padding: 2px 4px; border-radius: 4px;}
+
+  .typing{
+    align-self:flex-end;
+    background:rgba(255,255,255,0.05);
+    padding:12px 16px;
+    border-radius:var(--radius-sm);
+    border-bottom-right-radius:4px;
+    display:flex; gap:5px;
+    opacity:0;
+    animation:rise .3s forwards;
+  }
+  .typing i{
+    width:7px;height:7px;border-radius:50%;background:var(--ink-faint);
+    animation:blink 1.4s infinite;
+  }
+  .typing i:nth-child(2){ animation-delay:.2s; }
+  .typing i:nth-child(3){ animation-delay:.4s; }
+  @keyframes blink{ 0%,100%{opacity:.2; transform: scale(1);} 50%{opacity:1; transform: scale(1.1);} }
+
+  /* ===== SECTION SHARED ===== */
+  section{ padding:100px 0; }
+  .section-tag{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:var(--whatsapp);
+    margin-bottom:12px;
+    display:inline-block;
+    background: var(--whatsapp-faint);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  h2.h{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(2rem, 4vw, 3rem);
+    margin-bottom:20px;
+    color: var(--ink);
+    letter-spacing: -1px;
+    max-width: 20ch;
+  }
+
+  /* ===== LIVE COMMANDS TICKER ===== */
+  .ticker-wrap {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 14px 0;
+    overflow: hidden;
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+  }
+  .ticker {
+    display: flex;
+    gap: 40px;
+    animation: tickerLoop 25s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .ticker-item {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+  .ticker-item::before {
+    content: '★';
+    color: var(--whatsapp);
+  }
+  @keyframes tickerLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+  }
+
+  /* ===== SERVICES / COMMAND MENU ===== */
+  .cmd-console{
+    background:var(--surface);
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+  }
+  .cmd-bar{
+    display:flex; gap:8px; padding:16px 20px;
+    background: rgba(0,0,0,0.15);
+    border-bottom:1px solid var(--line);
+    align-items: center;
+  }
+  .cmd-bar .dots{ display: flex; gap: 6px;}
+  .cmd-bar span.d{ width:12px;height:12px;border-radius:50%; }
+  .cmd-bar span:nth-child(1){ background:#FF5F57; }
+  .cmd-bar span:nth-child(2){ background:#FEBC2E; }
+  .cmd-bar span:nth-child(3){ background:#28C840; }
+  .cmd-bar .title { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); margin-right: 15px;}
+
+  .cmd-list{ padding:10px; }
+  .cmd-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:24px;
+    padding:26px 20px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+  }
+  .cmd-item:hover { background: rgba(255,255,255,0.02);}
+  .cmd-item:not(:last-child){ border-bottom:1px solid var(--line); }
+  
+  .cmd-name{
+    font-family:var(--mono);
+    color:var(--amber);
+    font-weight:600;
+    font-size:1.05rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cmd-name::before{ content:'/'; color:var(--whatsapp); font-weight: 400;}
+  .cmd-desc{ color:var(--ink-soft); font-size:1rem; max-width:55ch; line-height: 1.7;}
+  .cmd-desc b{ color:var(--ink); font-weight: 600;}
+
+  /* ===== ABOUT CARD ===== */
+  .about-section {
+    background: var(--bg-alt);
+    padding: 100px 0;
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:48px;
+    align-items:center;
+  }
+  .id-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:28px;
+    width:250px;
+    font-family:var(--mono);
+    font-size:0.85rem;
+    box-shadow: var(--shadow-md);
+  }
+  .id-card .avatar{
+    width:64px;height:64px;border-radius:18px;
+    background:linear-gradient(135deg, var(--teal), var(--whatsapp));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff; font-family:var(--display); font-weight:900; font-size:1.6rem;
+    margin-bottom:20px;
+  }
+  .id-card dl{ display:flex; flex-direction:column; gap:12px; margin-top:20px; border-top: 1px solid var(--line); padding-top: 20px;}
+  .id-card dt{ color:var(--ink-faint); font-size:0.75rem; font-weight:600;}
+  .id-card dd{ color:var(--ink); font-weight:600; font-size: 0.9rem;}
+  
+  .about-text p{ color:var(--ink-soft); font-size:1.1rem; max-width:60ch; margin-bottom:20px; }
+  .about-text strong{ color:var(--ink); }
+
+  /* ===== CONTACT ===== */
+  .contact-panel{
+    background:linear-gradient(135deg, #111827 0%, #080b14 100%);
+    border-radius:var(--radius-lg);
+    padding:70px 56px;
+    color:#fff;
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:48px;
+    align-items:center;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .contact-panel::before {
+    content:''; position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+    background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><g fill="%239C92AC" fill-opacity="0.03" fill-rule="evenodd"><path d="M0 0h20L0 20z"/></g></svg>');
+  }
+  
+  .contact-panel h2{
+    font-family:var(--display); font-weight:900;
+    font-size:clamp(1.8rem, 3.5vw, 2.6rem);
+    margin-bottom:18px; line-height: 1.2;
+  }
+  .contact-panel p{ color:var(--ink-soft); max-width:42ch; font-size: 1.1rem; margin-bottom: 0;}
+  
+  .contact-actions{ display:flex; flex-direction:column; gap:16px; position: relative; z-index: 1;}
+  .contact-line{
+    display:flex; align-items:center; gap:16px;
+    background:var(--surface);
+    padding:20px;
+    border-radius:var(--radius-sm);
+    border: 1px solid var(--line);
+    transition:all 0.3s ease;
+  }
+  .contact-line:hover{ background:var(--bg-alt); border-color: var(--ink-faint); transform: translateX(-5px);}
+  .contact-line .ic{
+    width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--bg);
+    flex-shrink:0; border: 1px solid var(--line);
+  }
+  .contact-line b{ display:block; font-size:1rem; color: var(--ink); font-weight: 700;}
+  .contact-line span{ font-size:0.85rem; color:var(--ink-faint); font-family:var(--mono); }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:40px 0;
+    text-align:center;
+    color:var(--ink-faint);
+    font-size:0.85rem;
+    font-family:var(--mono);
+    border-top: 1px solid var(--line);
+    background: var(--bg-alt);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:960px){
+    .hero{ grid-template-columns:1fr; padding-top:80px; text-align: center;}
+    .hero p.lead { margin-left: auto; margin-right: auto;}
+    .hero-ctas { justify-content: center;}
+    .stat-row { justify-content: center; gap: 24px;}
+    .navlinks{ display:none; }
+  }
+  @media(max-width:768px){
+    section { padding: 70px 0;}
+    .about-grid, .contact-panel, .cmd-item{ grid-template-columns:1fr; }
+    .cmd-item { gap: 8px; padding: 20px;}
+    .contact-panel { padding: 40px 24px; text-align: center;}
+    .contact-line { text-align: right;}
+    h2.h { margin-bottom: 24px;}
+  }
+
+  /* Scroll Reveal */
+  .reveal{
+    opacity:0; transform:translateY(20px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">
+      <span class="decor">『𓅖⃟</span>
+      <div class="name-wrap">
+        M<span class="ball-o"></span>hamed
+      </div>
+      <span class="decor">𓅖』</span>
+      <span class="dev-tag">.dev</span>
+    </div>
+    <ul class="navlinks">
+      <li><a href="#services">الخدمات</a></li>
+      <li><a href="#about">من أنا</a></li>
+      <li><a href="#contact">تواصل معي</a></li>
+    </ul>
+    <a class="navbtn" href="https://wa.me/201038638609">اطلب بوتك</a>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div class="reveal in">
+    <div class="eyebrow"><span class="pulse-dot"></span>متاح أونلاين الآن • Top1</div>
+    <h1 class="title">أبني أنظمة واتساب<br><span>ذكية</span> تعمل بالأوامر.</h1>
+    <p class="lead">أهلاً بك! أنا 『𓅖⃟Mohamed𓅖』، مطوّر بوتات واتساب محترف من مصر 🇪🇬. أصمم وأبرمج حلولاً تفاعلية سريعة ومخصصة لتسهيل وإدارة محادثاتك وأعمالك تلقائياً.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://wa.me/201038638609" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20.5 3.5A11 11 0 0 0 3.7 17.3L2 22l4.9-1.6A11 11 0 1 0 20.5 3.5Z" stroke="#fff" stroke-width="2"/><path d="M8 8.8c.2-1 1-1 1.5-1 .4 0 .7.4.9.9.2.5.6 1.3.4 1.7-.2.4-.5.6-.3 1 .2.4 1 1.5 2 2.2.9.7 1.4.8 1.8.6.4-.2.6-.5 1-.3.4.2 1.3.7 1.6.9.3.2.5.3.5.7 0 .4-.6 1.4-1.6 1.6-1 .2-2.1 0-4-1-1.9-1-3.2-2.6-3.6-3.4-.4-.8-.7-1.6-.2-2.9Z" fill="#fff"/></svg>
+        تواصل على واتساب
+      </a>
+      <a class="btn btn-ghost" href="#services">استكشف الخدمات</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>١٦ سنة</b><span>العمر</span></div>
+      <div class="stat"><b>EG 🇪🇬</b><span>الموقع</span></div>
+      <div class="stat"><b>JS / HTML</b><span>أدوات التطوير</span></div>
+    </div>
+  </div>
+
+  <div class="phone-container reveal in">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="chat-head">
+          <div class="chat-avatar">M</div>
+          <div>
+            <b>Mohamed Bot</b>
+            <div class="status">متصل الآن</div>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="bg-alt">
+  <div class="wrap reveal">
+    <span class="section-tag">// الأوامر والخدمات</span>
+    <h2 class="h">حلول واتساب تفاعلية متكاملة</h2>
+    
+    <div class="ticker-wrap">
+      <div class="ticker" dir="ltr">
+        <span class="ticker-item">/start (تشغيل البوت)</span>
+        <span class="ticker-item">/help (عرض المساعدة)</span>
+        <span class="ticker-item">/order (طلب جديد)</span>
+        <span class="ticker-item">/status (متابعة الطلبات)</span>
+        <span class="ticker-item">/ping (قياس سرعة الرد)</span>
+        <span class="ticker-item">/menu (عرض قائمة الخدمات)</span>
+        <span class="ticker-item">/mute (كتم المحادثة)</span>
+        <span class="ticker-item">/start (تشغيل البوت)</span>
+        <span class="ticker-item">/help (عرض المساعدة)</span>
+        <span class="ticker-item">/order (طلب جديد)</span>
+        <span class="ticker-item">/status (متابعة الطلبات)</span>
+        <span class="ticker-item">/ping (قياس سرعة الرد)</span>
+        <span class="ticker-item">/menu (عرض قائمة الخدمات)</span>
+        <span class="ticker-item">/mute (كتم المحادثة)</span>
+      </div>
+    </div>
+
+    <div class="cmd-console">
+      <div class="cmd-bar">
+        <div class="dots"><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="title">mohamed-bot-services.js</div>
+      </div>
+      <div class="cmd-list">
+        <div class="cmd-item">
+          <div class="cmd-name">whatsapp_bots</div>
+          <div class="cmd-desc">تصميم وتطوير <b>بوتات واتساب تفاعلية</b> بالكامل للشركات، المتاجر، والأفراد لأتمتة الردود.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-name">custom_commands</div>
+          <div class="cmd-desc">برمجة <b>أنظمة أوامر مخصصة</b> وسريعة الاستجابة لتنفيذ مهام محددة تلقائياً داخل المحادثات.</div>
+        </div>
+        <div class="cmd-item">
+          <div class="cmd-name">support_and_fixes</div>
+          <div class="cmd-desc">متابعة ودعم مستمر بعد التسليم لضمان استقرار البوت وتحديثه وحل أي مشكلة تظهر فوراً.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="wrap about-grid reveal">
+    <div class="id-card">
+      <div class="avatar">M</div>
+      <div style="font-family: Arial, sans-serif; text-align: center; font-weight: bold; font-size: 1rem; margin-top: 10px;">『𓅖⃟Mohamed𓅖』</div>
+      <dl>
+        <dt>العمر</dt><dd>16 سنة</dd>
+        <dt>البلد</dt><dd>مصر 🇪🇬</dd>
+        <dt>التخصص</dt><dd>بوتات واتساب</dd>
+        <dt>الحالة</dt><dd>متاح للمشاريع</dd>
+      </dl>
+    </div>
+    <div class="about-text">
+      <span class="section-tag">// نبذة عني</span>
+      <p>أهلاً بك، أنا <strong>『𓅖⃟Mohamed𓅖』</strong> مطوّر برمجيات شاب وشغوف من مصر 🇪🇬. أركز كامل مهاراتي على بناء وتخصيص أنظمة ردود تفاعلية قوية تعمل بالأوامر داخل تطبيق واتساب.</p>
+      <p>أهتم جداً بجعل واجهة التعامل مع البوت فائقة البساطة وسريعة بشكل مذهل، ومبنية بذكاء باستخدام <strong>JavaScript</strong> لضمان استجابة البوت في أجزاء من الثانية.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="contact-panel">
+      <div>
+        <span class="section-tag" style="color:var(--amber); background: rgba(245, 158, 11, 0.1);">// تواصل معي</span>
+        <h2>جاهز لتبني بوت واتساب تفاعلي ومحترف؟</h2>
+        <p>تواصل معي اليوم لمناقشة فكرة بوتك والبدء في تنفيذها بأقرب وقت.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="contact-line" href="https://wa.me/201038638609" target="_blank" rel="noopener">
+          <span class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.5 3.5A11 11 0 0 0 3.7 17.3L2 22l4.9-1.6A11 11 0 1 0 20.5 3.5Z" stroke="#22C55E" stroke-width="1.6"/><path d="M8 8.8c.2-1 1-1 1.5-1 .4 0 .7.4.9.9.2.5.6 1.3.4 1.7-.2.4-.5.6-.3 1 .2.4 1 1.5 2 2.2.9.7 1.4.8 1.8.6.4-.2.6-.5 1-.3.4.2 1.3.7 1.6.9.3.2.5.3.5.7 0 .4-.6 1.4-1.6 1.6-1 .2-2.1 0-4-1-1.9-1-3.2-2.6-3.6-3.4-.4-.8-.7-1.6-.2-2.9Z" fill="#22C55E"/></svg>
+          </span>
+          <div><b>واتساب</b><span>01038638609</span></div>
+        </a>
+        <a class="contact-line" href="https://t.me/Top1Hamada" target="_blank" rel="noopener">
+          <span class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 4 3 11.4l5.3 1.8L10 19l3-3.6 4.6 3.4L21 4Z" stroke="#4FA8DE" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.3 13.2 17.6 6.8" stroke="#4FA8DE" stroke-width="1.4"/></svg>
+          </span>
+          <div><b>تليجرام</b><span>@Top1Hamada</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 『𓅖⃟Mohamed𓅖』 Dev — جميع الحقوق محفوظة.
+</footer>
+
+<script>
+  // Scroll Reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Chat simulator
+  const chatBody = document.getElementById('chatBody');
+  const script = [
+    {type:'user', text:'/ابدأ'},
+    {type:'typing'},
+    {type:'bot', text:'أهلاً بك 👋 أنا بوت 『𓅖⃟Mohamed𓅖』 الذكي.\nاكتب <span class="cmd">/الخدمات</span> لعرض ما يمكنني فعله.'},
+    {type:'user', text:'/الخدمات'},
+    {type:'typing'},
+    {type:'bot', text:'1️⃣ برمجة بوتات كاملة\n2️⃣ إضافة أوامر مخصصة\n3️⃣ دعم وحل مشكلات الكود\n\nاكتب رقم الخدمة لمزيد من المعلومات.'},
+    {type:'user', text:'1'},
+    {type:'typing'},
+    {type:'bot', text:'اختيار رائع! سأقوم بتوجيهك فوراً للتحدث مع المطور لمناقشة تفاصيل بوتك.'},
+  ];
+
+  let i = 0;
+  function step(){
+    if(chatBody.children.length > 5){
+      chatBody.innerHTML = '';
+    }
+    const item = script[i % script.length];
+    
+    if(item.type === 'typing'){
+      const t = document.createElement('div');
+      t.className = 'typing';
+      t.innerHTML = '<i></i><i></i><i></i>';
+      chatBody.appendChild(t);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      setTimeout(()=>{ t.remove(); i++; step(); }, 1200);
+      return;
+    }
+    
+    const b = document.createElement('div');
+    b.className = 'bubble ' + (item.type === 'user' ? 'user' : 'bot');
+    b.innerHTML = item.text;
+    chatBody.appendChild(b);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    i++;
+    setTimeout(step, item.type === 'user' ? 1000 : 2500);
+  }
+  
+  setTimeout(step, 2000);
+</script>
+
+</body>
+</html>
